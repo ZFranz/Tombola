@@ -25,8 +25,8 @@ public class Server {
 	protected Shell shlServer;
 	// Array di PrintWriter
 	static ArrayList<PrintWriter> clientList = new ArrayList<PrintWriter>();
-	private Display display;
-	private Table table;
+	private static Display display;
+	private Table tblTabellone;
 	private int num = 1;
 	private ArrayList<String> numeri = new ArrayList<String>();
 	private boolean controllo = true;
@@ -36,6 +36,7 @@ public class Server {
 	private static boolean controllo_quaterna = true;
 	private static boolean controllo_cinquina = true;
 	private static boolean controllo_tombola = true;
+	private static Table tblVincitori;
 
 	/**
 	 * Launch the application.
@@ -84,7 +85,6 @@ public class Server {
 				// Quando riceve un messaggio
 				while (true) {
 					String message = in.readLine();
-					System.out.println("Il server riceve: " + message);
 
 					if (message.equals("cartella")) {
 						if (inizia_partita) {
@@ -93,61 +93,70 @@ public class Server {
 							out.println("partita iniziata");
 						}
 					}
-					switch (message) {
-					case "Ambo":
-						if (controllo_ambo) {
-							out.println("vincita");
-							out.println("vincita ambo");
-							controllo_ambo = false;
-						} else {
-							out.println("vincita");
-							out.println("vincita ambo riscattata");
-						}
-						break;
+					if (message.equals("vincita")) {
+						message = in .readLine();
+						switch (message) {
+						case "Ambo":
+							if (controllo_ambo) {
+								message = in.readLine();
+								out.println("vincita");
+								out.println("vincita ambo");
+								setAmboWinner(message);
+								controllo_ambo = false;
+							} else {
+								out.println("vincita");
+								out.println("vincita ambo riscattata");
+							}
+							break;
 
-					case "Terna":
-						if (controllo_terna) {
-							out.println("vincita");
-							out.println("vincita terna");
-							controllo_terna = false;
-						} else {
-							out.println("vincita");
-							out.println("vincita terna riscattata");
-						}
-						break;
+						case "Terna":
+							if (controllo_terna) {
+								out.println("vincita");
+								out.println("vincita terna");
+								setTernaWinner(message);
+								controllo_terna = false;
+							} else {
+								out.println("vincita");
+								out.println("vincita terna riscattata");
+							}
+							break;
 
-					case "Quaterna":
-						if (controllo_quaterna) {
-							out.println("vincita");
-							out.println("vincita quaterna");
-							controllo_quaterna = false;
-						} else {
-							out.println("vincita");
-							out.println("vincita quaterna riscattata");
-						}
-						break;
+						case "Quaterna":
+							if (controllo_quaterna) {
+								out.println("vincita");
+								out.println("vincita quaterna");
+								setQuaternaWinner(message);
+								controllo_quaterna = false;
+							} else {
+								out.println("vincita");
+								out.println("vincita quaterna riscattata");
+							}
+							break;
 
-					case "Cinquina":
-						if (controllo_cinquina) {
-							out.println("vincita");
-							out.println("vincita cinquina");
-							controllo_cinquina = false;
-						} else {
-							out.println("vincita");
-							out.println("vincita cinquina riscattata");
-						}
-						break;
+						case "Cinquina":
+							if (controllo_cinquina) {
+								out.println("vincita");
+								out.println("vincita cinquina");
+								setCinquinaWinner(message);
+								controllo_cinquina = false;
+							} else {
+								out.println("vincita");
+								out.println("vincita cinquina riscattata");
+							}
+							break;
 
-					case "Tombola":
-						if (controllo_tombola) {
-							out.println("vincita");
-							out.println("vincita tombola");
-							controllo_tombola = false;
-						} else {
-							out.println("vincita");
-							out.println("vincita tombola riscattata");
+						case "Tombola":
+							if (controllo_tombola) {
+								out.println("vincita");
+								out.println("vincita tombola");
+								setTombolaWinner(message);
+								controllo_tombola = false;
+							} else {
+								out.println("vincita");
+								out.println("vincita tombola riscattata");
+							}
+							break;
 						}
-						break;
 					}
 
 					// Manda il messaggio a tutti i client
@@ -163,12 +172,62 @@ public class Server {
 
 		}
 	}
+	
+	public static void setAmboWinner(String uuid) {
+		display.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				TableItem item = tblVincitori.getItem(0);
+				item.setText(1, uuid);
+			}
+		});
+	}
+	
+	public static void setTernaWinner(String uuid) {
+		display.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				TableItem item = tblVincitori.getItem(1);
+				item.setText(1, uuid);
+			}
+		});
+	}
+	
+	public static void setQuaternaWinner(String uuid) {
+		display.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				TableItem item = tblVincitori.getItem(2);
+				item.setText(1, uuid);
+			}
+		});
+	}
+	
+	public static void setCinquinaWinner(String uuid) {
+		display.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				TableItem item = tblVincitori.getItem(3);
+				item.setText(1, uuid);
+			}
+		});
+	}
+	
+	public static void setTombolaWinner(String uuid) {
+		display.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				TableItem item = tblVincitori.getItem(4);
+				item.setText(1, uuid);
+			}
+		});
+	}
 
 	public void DrawTable() {
-		table.removeAll();
+		tblTabellone.removeAll();
 		for (int i = 0; i < 9; i++) {
 			if (num < 10) {
-				TableItem tableItem = new TableItem(table, SWT.NONE);
+				TableItem tableItem = new TableItem(tblTabellone, SWT.NONE);
 				tableItem.setText(0, "0" + Integer.toString(num++));
 				tableItem.setText(1, "0" + Integer.toString(num++));
 				tableItem.setText(2, "0" + Integer.toString(num++));
@@ -180,7 +239,7 @@ public class Server {
 				tableItem.setText(8, "0" + Integer.toString(num++));
 				tableItem.setText(9, Integer.toString(num++));
 			} else {
-				TableItem tableItem = new TableItem(table, SWT.NONE);
+				TableItem tableItem = new TableItem(tblTabellone, SWT.NONE);
 				tableItem.setText(0, Integer.toString(num++));
 				tableItem.setText(1, Integer.toString(num++));
 				tableItem.setText(2, Integer.toString(num++));
@@ -200,25 +259,29 @@ public class Server {
 	 */
 	protected void createContents() {
 		shlServer = new Shell();
-		shlServer.setSize(340, 344);
+		shlServer.setSize(340, 490);
 		shlServer.setText("Server");
 
 		Color green = display.getSystemColor(SWT.COLOR_GREEN);
 		Button btnAvviaServer = new Button(shlServer, SWT.NONE);
 		Button btnAvviaPartita = new Button(shlServer, SWT.NONE);
 		Label lblTabellone = new Label(shlServer, SWT.NONE);
-		table = new Table(shlServer, SWT.BORDER | SWT.FULL_SELECTION);
-		TableColumn tblclmnColumn0 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn1 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn2 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn3 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn4 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn5 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn6 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn7 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn8 = new TableColumn(table, SWT.NONE);
-		TableColumn tblclmnColumn9 = new TableColumn(table, SWT.NONE);
+		tblTabellone = new Table(shlServer, SWT.BORDER);
+		TableColumn tblclmnColumn0 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn1 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn2 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn3 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn4 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn5 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn6 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn7 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn8 = new TableColumn(tblTabellone, SWT.NONE);
+		TableColumn tblclmnColumn9 = new TableColumn(tblTabellone, SWT.NONE);
 		Button btnEstraiUnNumero = new Button(shlServer, SWT.NONE);
+		Label lblListaVincitori = new Label(shlServer, SWT.NONE);
+		tblVincitori = new Table(shlServer, SWT.BORDER);
+		TableColumn tblclmnVincita = new TableColumn(tblVincitori, SWT.NONE);
+		TableColumn tblclmnVincitore = new TableColumn(tblVincitori, SWT.NONE);
 
 		btnAvviaServer.setBounds(10, 10, 85, 25);
 		btnAvviaServer.setText("Avvia Server");
@@ -264,19 +327,20 @@ public class Server {
 			public void widgetSelected(SelectionEvent e) {
 				inizia_partita = false;
 				btnEstraiUnNumero.setEnabled(true);
+				btnAvviaPartita.setEnabled(false);
 			}
 		});
 
 		lblTabellone.setBounds(10, 41, 55, 15);
 		lblTabellone.setText("Tabellone");
 
-		final TableEditor editor = new TableEditor(table);
+		final TableEditor editor = new TableEditor(tblTabellone);
 		editor.horizontalAlignment = SWT.LEFT;
 		editor.grabHorizontal = true;
 
-		table.setBounds(10, 62, 305, 200);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
+		tblTabellone.setBounds(10, 62, 305, 200);
+		tblTabellone.setHeaderVisible(true);
+		tblTabellone.setLinesVisible(true);
 
 		tblclmnColumn0.setResizable(false);
 		tblclmnColumn0.setWidth(30);
@@ -308,7 +372,7 @@ public class Server {
 		tblclmnColumn9.setResizable(false);
 		tblclmnColumn9.setWidth(30);
 
-		btnEstraiUnNumero.setBounds(10, 268, 120, 25);
+		btnEstraiUnNumero.setBounds(10, 268, 305, 25);
 		btnEstraiUnNumero.setText("Estrai un numero");
 		btnEstraiUnNumero.setEnabled(false);
 		btnEstraiUnNumero.addSelectionListener(new SelectionAdapter() {
@@ -339,7 +403,7 @@ public class Server {
 
 				// coloro la cella del numero estratto a caso
 				for (int i = 0; i < 9; i++) {
-					TableItem item = table.getItem(i);
+					TableItem item = tblTabellone.getItem(i);
 					for (int j = 0; j < 10; j++) {
 						if (num < 10) {
 							if (item.getText(j).equals("0" + Integer.toString(num))) {
@@ -369,5 +433,43 @@ public class Server {
 		});
 
 		DrawTable();
+
+		lblListaVincitori.setBounds(10, 299, 85, 15);
+		lblListaVincitori.setText("Lista vincitori");
+
+		tblVincitori.setBounds(10, 320, 305, 123);
+		tblVincitori.setHeaderVisible(true);
+		tblVincitori.setLinesVisible(true);
+
+		tblclmnVincita.setWidth(60);
+		tblclmnVincita.setText("Vincita");
+
+		tblclmnVincitore.setWidth(240);
+		tblclmnVincitore.setText("Vincitore");
+
+		for (int i = 0; i < 5; i++) {
+			TableItem item = new TableItem(tblVincitori, SWT.NONE);
+			switch (i) {
+			case 0:
+				item.setText(0, "Ambo");
+				break;
+
+			case 1:
+				item.setText(0, "Terna");
+				break;
+
+			case 2:
+				item.setText(0, "Quaterna");
+				break;
+
+			case 3:
+				item.setText(0, "Cinquina");
+				break;
+
+			case 4:
+				item.setText(0, "Tombola");
+				break;
+			}
+		}
 	}
 }

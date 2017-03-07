@@ -73,7 +73,6 @@ public class ClientReceiver extends Thread {
 							}
 							if (ultimaVincita == Vincita.Tombola) {
 								Utility.info("Tombola uscita, partita finita!");
-								return;
 							}
 						}
 					}

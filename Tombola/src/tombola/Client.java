@@ -423,23 +423,56 @@ public class Client {
 				// invia il messaggio al server
 				out.println("vincita");
 				out.println("Ambo");
+				out.println(uuid);
 			}
 		});
 
 		btnTerna.setBounds(101, 176, 92, 25);
 		btnTerna.setText("Terna");
 		btnTerna.setEnabled(false);
+		btnTerna.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// invia il messaggio al server
+				out.println("vincita");
+				out.println("Terna");
+			}
+		});
 
 		btnQuaterna.setBounds(200, 176, 85, 25);
 		btnQuaterna.setText("Quaterna");
 		btnQuaterna.setEnabled(false);
+		btnQuaterna.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// invia il messaggio al server
+				out.println("vincita");
+				out.println("Quaterna");
+			}
+		});
 
 		btnCinquina.setBounds(10, 207, 134, 25);
 		btnCinquina.setText("Cinquina");
 		btnCinquina.setEnabled(false);
+		btnCinquina.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// invia il messaggio al server
+				out.println("vincita");
+				out.println("Cinquina");
+			}
+		});
 
 		btnTombola.setBounds(150, 207, 134, 25);
 		btnTombola.setText("Tombola");
 		btnTombola.setEnabled(false);
+		btnTombola.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// invia il messaggio al server
+				out.println("vincita");
+				out.println("Tombola");
+			}
+		});
 	}
 }
