@@ -71,9 +71,9 @@ public class ClientReceiver extends Thread {
 								c.enableTombola();
 								break;
 							}
-							if (ultimaVincita == Vincita.Tombola) {
+							/*if (ultimaVincita == Vincita.Tombola) {
 								Utility.info("Tombola uscita, partita finita!");
-							}
+							}*/
 						}
 					}
 				} else if (message.equals("vincita")) {
