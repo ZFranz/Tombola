@@ -436,6 +436,7 @@ public class Client {
 				// invia il messaggio al server
 				out.println("vincita");
 				out.println("Terna");
+				out.println(uuid);
 			}
 		});
 
@@ -448,6 +449,7 @@ public class Client {
 				// invia il messaggio al server
 				out.println("vincita");
 				out.println("Quaterna");
+				out.println(uuid);
 			}
 		});
 
@@ -460,6 +462,7 @@ public class Client {
 				// invia il messaggio al server
 				out.println("vincita");
 				out.println("Cinquina");
+				out.println(uuid);
 			}
 		});
 
@@ -472,6 +475,7 @@ public class Client {
 				// invia il messaggio al server
 				out.println("vincita");
 				out.println("Tombola");
+				out.println(uuid);
 			}
 		});
 	}
