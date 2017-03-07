@@ -111,6 +111,7 @@ public class Server {
 
 						case "Terna":
 							if (controllo_terna) {
+								message = in.readLine();
 								out.println("vincita");
 								out.println("vincita terna");
 								setTernaWinner(message);
@@ -123,6 +124,7 @@ public class Server {
 
 						case "Quaterna":
 							if (controllo_quaterna) {
+								message = in.readLine();
 								out.println("vincita");
 								out.println("vincita quaterna");
 								setQuaternaWinner(message);
@@ -135,6 +137,7 @@ public class Server {
 
 						case "Cinquina":
 							if (controllo_cinquina) {
+								message = in.readLine();
 								out.println("vincita");
 								out.println("vincita cinquina");
 								setCinquinaWinner(message);
@@ -147,6 +150,7 @@ public class Server {
 
 						case "Tombola":
 							if (controllo_tombola) {
+								message = in.readLine();
 								out.println("vincita");
 								out.println("vincita tombola");
 								setTombolaWinner(message);
