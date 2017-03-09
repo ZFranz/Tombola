@@ -16,13 +16,14 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 public class Server {
 
-	protected Shell shlServer;
+	protected static Shell shlServer;
 	// Array di PrintWriter
 	static ArrayList<PrintWriter> clientList = new ArrayList<PrintWriter>();
 	private static Display display;
@@ -238,6 +239,10 @@ public class Server {
 				TableItem item = tblVincitori.getItem(4);
 				item.setText(1, uuid);
 				tombolaWinner = uuid;
+				MessageBox mb = new MessageBox(shlServer);
+				mb.setText("Winner");
+				mb.setMessage("Congratulazioni\n" + tombolaWinner + "\nhai vinto.");
+				mb.open();
 			}
 		});
 	}

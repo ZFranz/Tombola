@@ -197,13 +197,18 @@ public class Client {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
-				mb.setText("Non hai vinto");
-				mb.setMessage("L\'ambo è già stato riscattato da: " + message);
+				if (message.equals(uuid.toString())) {
+					mb.setText("Hai vinto");
+					mb.setMessage("Hai già riscattato l\'ambo.");
+				} else {
+					mb.setText("Non hai vinto");
+					mb.setMessage("L\'ambo è già stato riscattato da: " + message);
+				}
 				mb.open();
 			}
 		});
 	}
-	
+
 	public void prize_terna() {
 		display.asyncExec(new Runnable() {
 			@Override
@@ -221,13 +226,18 @@ public class Client {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
-				mb.setText("Non hai vinto");
-				mb.setMessage("La terna è già stato riscattato da: " + message);
+				if (message.equals(uuid.toString())) {
+					mb.setText("Hai vinto");
+					mb.setMessage("Hai già riscattato la terna.");
+				} else {
+					mb.setText("Non hai vinto");
+					mb.setMessage("La terna è già stato riscattato da: " + message);
+				}
 				mb.open();
 			}
 		});
 	}
-	
+
 	public void prize_quaterna() {
 		display.asyncExec(new Runnable() {
 			@Override
@@ -245,13 +255,18 @@ public class Client {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
-				mb.setText("Non hai vinto");
-				mb.setMessage("La quaterna è già stato riscattato da: " + message);
+				if (message.equals(uuid.toString())) {
+					mb.setText("Hai vinto");
+					mb.setMessage("Hai già riscattato la quaterna.");
+				} else {
+					mb.setText("Non hai vinto");
+					mb.setMessage("La quaterna è già stato riscattato da: " + message);
+				}
 				mb.open();
 			}
 		});
 	}
-	
+
 	public void prize_cinquina() {
 		display.asyncExec(new Runnable() {
 			@Override
@@ -269,13 +284,18 @@ public class Client {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
-				mb.setText("Non hai vinto");
-				mb.setMessage("La cinquina è già stato riscattato da: " + message);
+				if (message.equals(uuid.toString())) {
+					mb.setText("Hai vinto");
+					mb.setMessage("Hai già riscattato la cinquina.");
+				} else {
+					mb.setText("Non hai vinto");
+					mb.setMessage("La cinquina è già stato riscattato da: " + message);
+				}
 				mb.open();
 			}
 		});
 	}
-	
+
 	public void prize_tombola() {
 		display.asyncExec(new Runnable() {
 			@Override
@@ -293,8 +313,13 @@ public class Client {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
-				mb.setText("Non hai vinto");
-				mb.setMessage("La tombola è già stato riscattato da: " + message);
+				if (message.equals(uuid.toString())) {
+					mb.setText("Hai vinto");
+					mb.setMessage("Hai già riscattato la tombola.");
+				} else {
+					mb.setText("Non hai vinto");
+					mb.setMessage("La tombola è già stato riscattato da: " + message);
+				}
 				mb.open();
 			}
 		});
