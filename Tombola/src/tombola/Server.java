@@ -37,6 +37,11 @@ public class Server {
 	private static boolean controllo_cinquina = true;
 	private static boolean controllo_tombola = true;
 	private static Table tblVincitori;
+	private static String amboWinner = "";
+	private static String ternaWinner = "";
+	private static String quaternaWinner = "";
+	private static String cinquinaWinner = "";
+	private static String tombolaWinner = "";
 
 	/**
 	 * Launch the application.
@@ -106,6 +111,7 @@ public class Server {
 							} else {
 								out.println("vincita");
 								out.println("vincita ambo riscattata");
+								out.println(amboWinner);
 							}
 							break;
 
@@ -119,6 +125,7 @@ public class Server {
 							} else {
 								out.println("vincita");
 								out.println("vincita terna riscattata");
+								out.println(ternaWinner);
 							}
 							break;
 
@@ -132,6 +139,7 @@ public class Server {
 							} else {
 								out.println("vincita");
 								out.println("vincita quaterna riscattata");
+								out.println(quaternaWinner);
 							}
 							break;
 
@@ -145,6 +153,7 @@ public class Server {
 							} else {
 								out.println("vincita");
 								out.println("vincita cinquina riscattata");
+								out.println(cinquinaWinner);
 							}
 							break;
 
@@ -158,6 +167,7 @@ public class Server {
 							} else {
 								out.println("vincita");
 								out.println("vincita tombola riscattata");
+								out.println(tombolaWinner);
 							}
 							break;
 						}
@@ -183,6 +193,7 @@ public class Server {
 			public void run() {
 				TableItem item = tblVincitori.getItem(0);
 				item.setText(1, uuid);
+				amboWinner = uuid;
 			}
 		});
 	}
@@ -193,6 +204,7 @@ public class Server {
 			public void run() {
 				TableItem item = tblVincitori.getItem(1);
 				item.setText(1, uuid);
+				ternaWinner = uuid;
 			}
 		});
 	}
@@ -203,6 +215,7 @@ public class Server {
 			public void run() {
 				TableItem item = tblVincitori.getItem(2);
 				item.setText(1, uuid);
+				quaternaWinner = uuid;
 			}
 		});
 	}
@@ -213,6 +226,7 @@ public class Server {
 			public void run() {
 				TableItem item = tblVincitori.getItem(3);
 				item.setText(1, uuid);
+				cinquinaWinner = uuid;
 			}
 		});
 	}
@@ -223,6 +237,7 @@ public class Server {
 			public void run() {
 				TableItem item = tblVincitori.getItem(4);
 				item.setText(1, uuid);
+				tombolaWinner = uuid;
 			}
 		});
 	}
@@ -271,6 +286,7 @@ public class Server {
 		Button btnAvviaPartita = new Button(shlServer, SWT.NONE);
 		Label lblTabellone = new Label(shlServer, SWT.NONE);
 		tblTabellone = new Table(shlServer, SWT.BORDER);
+		tblTabellone.setLinesVisible(true);
 		TableColumn tblclmnColumn0 = new TableColumn(tblTabellone, SWT.NONE);
 		TableColumn tblclmnColumn1 = new TableColumn(tblTabellone, SWT.NONE);
 		TableColumn tblclmnColumn2 = new TableColumn(tblTabellone, SWT.NONE);
@@ -344,7 +360,6 @@ public class Server {
 
 		tblTabellone.setBounds(10, 62, 305, 200);
 		tblTabellone.setHeaderVisible(true);
-		tblTabellone.setLinesVisible(true);
 
 		tblclmnColumn0.setResizable(false);
 		tblclmnColumn0.setWidth(30);

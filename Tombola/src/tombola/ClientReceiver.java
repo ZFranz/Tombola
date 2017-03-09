@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.UUID;
 
-import org.eclipse.swt.widgets.MessageBox;
-
 public class ClientReceiver extends Thread {
 
 	private Socket s;
@@ -71,9 +69,6 @@ public class ClientReceiver extends Thread {
 								c.enableTombola();
 								break;
 							}
-							/*if (ultimaVincita == Vincita.Tombola) {
-								Utility.info("Tombola uscita, partita finita!");
-							}*/
 						}
 					}
 				} else if (message.equals("vincita")) {
@@ -84,7 +79,8 @@ public class ClientReceiver extends Thread {
 						break;
 
 					case "vincita ambo riscattata":
-						c.prize_ambo_won();
+						message = in.readLine();
+						c.prize_ambo_won(message);
 						break;
 						
 					case "vincita terna":
@@ -92,7 +88,8 @@ public class ClientReceiver extends Thread {
 						break;
 						
 					case "vincita terna riscattata":
-						c.prize_terna_won();
+						message = in.readLine();
+						c.prize_terna_won(message);
 						break;
 						
 					case "vincita quaterna":
@@ -100,7 +97,8 @@ public class ClientReceiver extends Thread {
 						break;
 						
 					case "vincita quaterna riscattata":
-						c.prize_quaterna_won();
+						message = in.readLine();
+						c.prize_quaterna_won(message);
 						break;
 						
 					case "vincita cinquina":
@@ -108,7 +106,8 @@ public class ClientReceiver extends Thread {
 						break;
 						
 					case "vincita cinquina riscattata":
-						c.prize_cinquina_won();
+						message = in.readLine();
+						c.prize_cinquina_won(message);
 						break;
 						
 					case "vincita tombola":
@@ -116,14 +115,10 @@ public class ClientReceiver extends Thread {
 						break;
 						
 					case "vincita tombola riscattata":
-						c.prize_tombola_won();
+						message = in.readLine();
+						c.prize_tombola_won(message);
 						break;
 					}
-					/*if (message.equals("vincita ambo")) {
-						c.prize_ambo();
-					} else if (message.equals("vincita ambo riscattata")) {
-						c.prize_ambo_won();
-					}*/
 				}
 
 			}

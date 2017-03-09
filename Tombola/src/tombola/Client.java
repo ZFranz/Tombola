@@ -3,12 +3,10 @@ package tombola;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.UUID;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -25,11 +23,8 @@ public class Client {
 	protected Shell shlClient;
 	private Socket s;
 	private PrintWriter out;
-	private BufferedReader in;
 	private Display display;
 	private Table table;
-	private boolean[] segnati;
-	private ArrayList<String> num = new ArrayList<String>();
 	private UUID uuid;
 	private Button btnAmbo;
 	private Button btnTerna;
@@ -96,7 +91,6 @@ public class Client {
 			@Override
 			public void run() {
 				int numeri[] = c.getNumeri();
-				segnati = new boolean[15];
 
 				for (int r = 0; r < 3; r++) {
 					String output = "";
@@ -198,13 +192,13 @@ public class Client {
 		});
 	}
 
-	public void prize_ambo_won() {
+	public void prize_ambo_won(String message) {
 		display.asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
 				mb.setText("Non hai vinto");
-				mb.setMessage("L\'ambo è già stato riscattato");
+				mb.setMessage("L\'ambo è già stato riscattato da: " + message);
 				mb.open();
 			}
 		});
@@ -222,13 +216,13 @@ public class Client {
 		});
 	}
 
-	public void prize_terna_won() {
+	public void prize_terna_won(String message) {
 		display.asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
 				mb.setText("Non hai vinto");
-				mb.setMessage("La terna è già stata riscattata");
+				mb.setMessage("La terna è già stato riscattato da: " + message);
 				mb.open();
 			}
 		});
@@ -246,13 +240,13 @@ public class Client {
 		});
 	}
 
-	public void prize_quaterna_won() {
+	public void prize_quaterna_won(String message) {
 		display.asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
 				mb.setText("Non hai vinto");
-				mb.setMessage("La quaterna è già stata riscattata");
+				mb.setMessage("La quaterna è già stato riscattato da: " + message);
 				mb.open();
 			}
 		});
@@ -270,13 +264,13 @@ public class Client {
 		});
 	}
 
-	public void prize_cinquina_won() {
+	public void prize_cinquina_won(String message) {
 		display.asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
 				mb.setText("Non hai vinto");
-				mb.setMessage("La cinquina è già stata riscattata");
+				mb.setMessage("La cinquina è già stato riscattato da: " + message);
 				mb.open();
 			}
 		});
@@ -294,13 +288,13 @@ public class Client {
 		});
 	}
 
-	public void prize_tombola_won() {
+	public void prize_tombola_won(String message) {
 		display.asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				MessageBox mb = new MessageBox(shlClient);
 				mb.setText("Non hai vinto");
-				mb.setMessage("La tombola è già stata riscattata");
+				mb.setMessage("La tombola è già stato riscattato da: " + message);
 				mb.open();
 			}
 		});
