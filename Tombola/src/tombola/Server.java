@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class Server {
 
@@ -283,6 +284,7 @@ public class Server {
 	 */
 	protected void createContents() {
 		shlServer = new Shell();
+		shlServer.setBackground(SWTResourceManager.getColor(0, 255, 204));
 		shlServer.setSize(340, 490);
 		shlServer.setText("Server");
 
@@ -358,6 +360,7 @@ public class Server {
 
 		lblTabellone.setBounds(10, 41, 55, 15);
 		lblTabellone.setText("Tabellone");
+		lblTabellone.setBackground(SWTResourceManager.getColor(51, 255, 204));
 
 		final TableEditor editor = new TableEditor(tblTabellone);
 		editor.horizontalAlignment = SWT.LEFT;
@@ -460,6 +463,7 @@ public class Server {
 
 		lblListaVincitori.setBounds(10, 299, 85, 15);
 		lblListaVincitori.setText("Lista vincitori");
+		lblListaVincitori.setBackground(SWTResourceManager.getColor(51, 255, 204));
 
 		tblVincitori.setBounds(10, 320, 305, 123);
 		tblVincitori.setHeaderVisible(true);

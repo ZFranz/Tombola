@@ -15,6 +15,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 
@@ -330,6 +331,7 @@ public class Client {
 	 */
 	protected void createContents() {
 		shlClient = new Shell();
+		shlClient.setBackground(SWTResourceManager.getColor(0, 255, 204));
 		shlClient.setSize(310, 280);
 		shlClient.setText("Client");
 
@@ -398,9 +400,11 @@ public class Client {
 
 		lblId.setBounds(10, 43, 275, 15);
 		lblId.setText("ID");
+		lblId.setBackground(SWTResourceManager.getColor(0, 255, 204));
 
 		lblTombola.setBounds(10, 64, 55, 15);
 		lblTombola.setText("Tombola");
+		lblTombola.setBackground(SWTResourceManager.getColor(0, 255, 204));
 
 		table.setBounds(10, 85, 275, 85);
 		table.setHeaderVisible(true);
